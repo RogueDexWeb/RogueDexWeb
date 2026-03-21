@@ -23,6 +23,11 @@ namespace RogueDexWeb.Models
         public async Task<T> GetItem<T>(string key)
         {
             var base64 = await _javaScript.InvokeAsync<string>("LocalStorageActions.getItem", key);
+            if (string.IsNullOrEmpty(base64))
+            {
+                return default;
+            }
+
             var value = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
             var deserialized = JsonSerializer.Deserialize<T>(value);
             return deserialized;

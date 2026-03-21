@@ -118,6 +118,7 @@
         IsLoading = true;
         await GetFullDexData();
         await JS.InvokeAsync<object>("DataTablesAdd", "#fulldextable");
+        IsLoading = false;
     }
 
     public async Task GetFullDexData()
@@ -137,7 +138,5 @@
         {
             ErrorMessage = ex.Message;
         }
-
-        IsLoading = false;
     }
 }
