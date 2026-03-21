@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RogueDexWeb</title>
-    <!--<base href="/RogueDexWeb/" />-->
-    <link href="_framework/dotnet.yfph10v9si.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-DmytzixqxnsxEMhI2STONbm7r66qwvZ8LTNDkSzd2g8=" />
+    <!--<base href="/RogueDexWeb/" /> cant have a base url or github pages wont work-->
+    <link href="_framework/dotnet.mop53up1dn.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-RvyfBhdXNT18EGBrAy4J0tz1OoF2O1t6tr0sIlGgR+M=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -15,25 +15,26 @@
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.66stpp682q.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.mop53up1dn.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.87vtjjdetb.js",
-    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.2tx45g8lli.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.yfph10v9si.js"
+    "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.2tx45g8lli.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.66stpp682q.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
     "./_framework/blazor.webassembly.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
-    "./_framework/dotnet.js": "sha256-DmytzixqxnsxEMhI2STONbm7r66qwvZ8LTNDkSzd2g8=",
+    "./_framework/dotnet.js": "sha256-RvyfBhdXNT18EGBrAy4J0tz1OoF2O1t6tr0sIlGgR+M=",
+    "./_framework/dotnet.mop53up1dn.js": "sha256-RvyfBhdXNT18EGBrAy4J0tz1OoF2O1t6tr0sIlGgR+M=",
     "./_framework/dotnet.native.87vtjjdetb.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
     "./_framework/dotnet.native.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
     "./_framework/dotnet.runtime.2tx45g8lli.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=",
-    "./_framework/dotnet.runtime.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=",
-    "./_framework/dotnet.yfph10v9si.js": "sha256-DmytzixqxnsxEMhI2STONbm7r66qwvZ8LTNDkSzd2g8="
+    "./_framework/dotnet.runtime.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco="
   }
 }</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
+
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.3.7/cr-2.1.2/cc-1.2.1/fc-5.0.5/fh-4.0.6/r-3.0.8/datatables.min.css" rel="stylesheet" integrity="sha384-p957VW3Iq7cioGIFCD9N4ACAZXkVxHvIR+8ZuaL4YJpMFHsrMfO8lw/8NHvdLIuj" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.3.7/cr-2.1.2/cc-1.2.1/fc-5.0.5/fh-4.0.6/r-3.0.8/datatables.min.js" integrity="sha384-h5mRb+WgXAW/X2u2KxXH1l8mOYjYsb23LcDYRlTJhps11KTauhEGdGKtcaRZlTmA" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -57,6 +58,10 @@
             $(document).ready(function () {
                 $(table).DataTable({
                     paging: false,
+                    searching: false,
+                    fixedHeader: {
+                        headerOffset: $('#topnavbar').outerHeight(),
+                    },
                     initComplete: function () {
                         this.api()
                             .columns()
