@@ -1,0 +1,5 @@
+# Needed for GitHub Pages (https://github.com/arvinboggs/BlazorGitHubPages)
+*.js binary
+*.json binary
+*.css binary
+*.html binary
