@@ -1,0 +1,143 @@
+﻿@page "/FullDexChecklist"
+@inject IJSRuntime JS
+
+<h3>Full Dex Checklist</h3>
+
+<div class="mb-3">
+    <label style="color:red">@ErrorMessage</label>
+</div>
+@if (IsLoading)
+{
+    <div class="mb-3">
+        <label style="color:red">Loading...</label>
+    </div>
+}
+@if (FullDexDataList.Count > 0)
+{
+    <body onbeforeunload="DataTablesRemove('#fulldextable')">
+        <table id="fulldextable" class="display">
+            <thead>
+                <tr>
+                    <th colspan="3" style="text-align: center"></th>
+                    <th colspan="2" style="text-align: center">Fought Data</th>
+                    <th colspan="7" style="text-align: center">Caught Data</th>
+                    <th colspan="6" style="text-align: center">IVs</th>
+                </tr>
+                <tr>
+                    <th style="text-align: center">Dex #</th>
+                    <th style="text-align: center">Pokemon</th>
+                    <th style="text-align: center">Starter Cost</th>
+                    <th style="text-align: center">Fought Flag</th>
+                    <th style="text-align: center">Fought Count</th>
+                    <th style="text-align: center">Caught Flag</th>
+                    <th style="text-align: center">Caught Count</th>
+                    <th style="text-align: center">Caught Male</th>
+                    <th style="text-align: center">Caught Female</th>
+                    <th style="text-align: center">Caught Shiny</th>
+                    <th style="text-align: center">Caught Shiny Rare</th>
+                    <th style="text-align: center">Caught Shiny Epic</th>
+                    <th style="text-align: center">HP</th>
+                    <th style="text-align: center">Atk</th>
+                    <th style="text-align: center">Def</th>
+                    <th style="text-align: center">SpAtk</th>
+                    <th style="text-align: center">SpDef</th>
+                    <th style="text-align: center">Speed</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dex in FullDexDataList)
+                {
+                    var foughtFlag = dex.SeenCount > 0;
+                    var caughtFlag = dex.CaughtAttr > 0;
+                    var male = dex.Species.Male ? dex.CaughtAttr.HasFlag(DexAttr.Male).ToString() : string.Empty;
+                    var female = dex.Species.Female ? dex.CaughtAttr.HasFlag(DexAttr.Female).ToString() : string.Empty;
+                    var variant2 = dex.Species.HasVariants ? dex.CaughtAttr.HasFlag(DexAttr.Variant2).ToString() : string.Empty;
+                    var variant3 = dex.Species.HasVariants ? dex.CaughtAttr.HasFlag(DexAttr.Variant3).ToString() : string.Empty;
+                    <tr>
+                        <td style="text-align: right">@dex.DexNr</td>
+                        <td style="text-align: left">@dex.Species.CleanName</td>
+                        <td style="text-align: center">@dex.Species.StarterCost</td>
+                        <td style="text-align: center">@foughtFlag</td>
+                        <td style="text-align: center">@dex.SeenCount</td>
+                        <td style="text-align: center">@caughtFlag</td>
+                        <td style="text-align: center">@dex.CaughtCount</td>
+                        <td style="text-align: center">@male</td>
+                        <td style="text-align: center">@female</td>
+                        <td style="text-align: center">@dex.CaughtAttr.HasFlag(DexAttr.Shiny)</td>
+                        <td style="text-align: center">@variant2</td>
+                        <td style="text-align: center">@variant3</td>
+                        <td style="text-align: center">@dex.IVs[0]</td>
+                        <td style="text-align: center">@dex.IVs[1]</td>
+                        <td style="text-align: center">@dex.IVs[2]</td>
+                        <td style="text-align: center">@dex.IVs[3]</td>
+                        <td style="text-align: center">@dex.IVs[4]</td>
+                        <td style="text-align: center">@dex.IVs[5]</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Dex #</th>
+                    <th>Pokemon</th>
+                    <th>Starter Cost</th>
+                    <th>Fought Flag</th>
+                    <th>Fought Count</th>
+                    <th>Caught Flag</th>
+                    <th>Caught Count</th>
+                    <th>Caught Male</th>
+                    <th>Caught Female</th>
+                    <th>Caught Shiny</th>
+                    <th>Caught Shiny Rare</th>
+                    <th>Caught Shiny Epic</th>
+                    <th>HP</th>
+                    <th>Atk</th>
+                    <th>Def</th>
+                    <th>SpAtk</th>
+                    <th>SpDef</th>
+                    <th>Speed</th>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+}
+
+@code {
+    [Inject] ILocalStorageHelper LocalStorage { get; set; }
+
+    [Parameter]
+    public bool IsLoading { get; set; } = true;
+
+    [Parameter]
+    public string ErrorMessage { get; set; } = string.Empty;
+
+    [Parameter]
+    public List<FullDexData> FullDexDataList { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsLoading = true;
+        await GetFullDexData();
+        await JS.InvokeAsync<object>("DataTablesAdd", "#fulldextable");
+    }
+
+    public async Task GetFullDexData()
+    {
+        try
+        {
+            var fullDexDataList = await LocalStorage.GetItem<List<FullDexData>>("fulldexdata");
+            if (fullDexDataList is null)
+            {
+                ErrorMessage = "No data found, please upload your Save File on the Home page.";
+                return;
+            }
+
+            FullDexDataList = fullDexDataList;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+
+        IsLoading = false;
+    }
+}
