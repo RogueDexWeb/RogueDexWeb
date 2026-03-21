@@ -22,9 +22,10 @@
                     <th colspan="2" style="text-align: center">Fought Data</th>
                     <th colspan="7" style="text-align: center">Caught Data</th>
                     <th colspan="6" style="text-align: center">IVs</th>
+                    <th colspan="4" style="text-align: center">Egg Moves</th>
                 </tr>
                 <tr>
-                    <th style="text-align: center">Dex #</th>
+                    <th style="text-align: center">Dex#</th>
                     <th style="text-align: center">Pokemon</th>
                     <th style="text-align: center">Starter Cost</th>
                     <th style="text-align: center">Fought Flag</th>
@@ -42,6 +43,10 @@
                     <th style="text-align: center">SpAtk</th>
                     <th style="text-align: center">SpDef</th>
                     <th style="text-align: center">Speed</th>
+                    <th style="text-align: center">Egg Move 1</th>
+                    <th style="text-align: center">Egg Move 2</th>
+                    <th style="text-align: center">Egg Move 3</th>
+                    <th style="text-align: center">Egg Move 4</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,12 +77,16 @@
                         <td style="text-align: center">@dex.IVs[3]</td>
                         <td style="text-align: center">@dex.IVs[4]</td>
                         <td style="text-align: center">@dex.IVs[5]</td>
+                        <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.First)</td>
+                        <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Second)</td>
+                        <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Third)</td>
+                        <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Rare)</td>
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Dex #</th>
+                    <th>Dex#</th>
                     <th>Pokemon</th>
                     <th>Starter Cost</th>
                     <th>Fought Flag</th>
@@ -95,6 +104,10 @@
                     <th>SpAtk</th>
                     <th>SpDef</th>
                     <th>Speed</th>
+                    <th>Egg Move 1</th>
+                    <th>Egg Move 2</th>
+                    <th>Egg Move 3</th>
+                    <th>Egg Move 4</th>
                 </tr>
             </tfoot>
         </table>

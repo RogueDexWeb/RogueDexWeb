@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RogueDexWeb</title>
-    <!--<base href="/RogueDexWeb/" />-->
+    <!--<base href="/RogueDexWeb/" /> cant have a base url or github pages wont work-->
     <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
@@ -14,8 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="importmap"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.dataTables.css" />
-    <script src="https://cdn.datatables.net/2.3.7/js/dataTables.js"></script>
+
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.3.7/cr-2.1.2/cc-1.2.1/fc-5.0.5/fh-4.0.6/r-3.0.8/datatables.min.css" rel="stylesheet" integrity="sha384-p957VW3Iq7cioGIFCD9N4ACAZXkVxHvIR+8ZuaL4YJpMFHsrMfO8lw/8NHvdLIuj" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.3.7/cr-2.1.2/cc-1.2.1/fc-5.0.5/fh-4.0.6/r-3.0.8/datatables.min.js" integrity="sha384-h5mRb+WgXAW/X2u2KxXH1l8mOYjYsb23LcDYRlTJhps11KTauhEGdGKtcaRZlTmA" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -39,6 +40,10 @@
             $(document).ready(function () {
                 $(table).DataTable({
                     paging: false,
+                    searching: false,
+                    fixedHeader: {
+                        headerOffset: $('#topnavbar').outerHeight(),
+                    },
                     initComplete: function () {
                         this.api()
                             .columns()
