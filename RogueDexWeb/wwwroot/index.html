@@ -5,7 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RogueDexWeb</title>
-    <!--<base href="/RogueDexWeb/" /> cant have a base url or github pages wont work-->
+    <!--<base href="/RogueDexWeb/" />-->
+    <script>
+        var baseTag = document.createElement("base");
+        var appRoot = "/RogueDexWeb/";
+        var path = document.location.pathname;
+        baseTag.href = (path.indexOf(appRoot) === 0 || path + "/" === appRoot) ? appRoot : "/";
+        document.head.appendChild(baseTag);
+    </script>
     <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
