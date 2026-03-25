@@ -13,7 +13,7 @@
         baseTag.href = (path.indexOf(appRoot) === 0 || path + "/" === appRoot) ? appRoot : "/";
         document.head.appendChild(baseTag);
     </script>
-    <link href="_framework/dotnet.rnf9w8x716.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-h8fNzrlBEiMXbiWCwRBCZnEpsyEC49T/Y3hfBng5N8g=" />
+    <link href="_framework/dotnet.o8x9w2w10d.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-eEdr9ga2b+LPyYMaRbymnl4MQ2cyN667bQBpffmlLEU=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -23,17 +23,17 @@
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.66stpp682q.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.87vtjjdetb.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.rnf9w8x716.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.o8x9w2w10d.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.2tx45g8lli.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.66stpp682q.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
     "./_framework/blazor.webassembly.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
-    "./_framework/dotnet.js": "sha256-h8fNzrlBEiMXbiWCwRBCZnEpsyEC49T/Y3hfBng5N8g=",
+    "./_framework/dotnet.js": "sha256-eEdr9ga2b+LPyYMaRbymnl4MQ2cyN667bQBpffmlLEU=",
     "./_framework/dotnet.native.87vtjjdetb.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
     "./_framework/dotnet.native.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
-    "./_framework/dotnet.rnf9w8x716.js": "sha256-h8fNzrlBEiMXbiWCwRBCZnEpsyEC49T/Y3hfBng5N8g=",
+    "./_framework/dotnet.o8x9w2w10d.js": "sha256-eEdr9ga2b+LPyYMaRbymnl4MQ2cyN667bQBpffmlLEU=",
     "./_framework/dotnet.runtime.2tx45g8lli.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=",
     "./_framework/dotnet.runtime.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco="
   }
@@ -102,6 +102,18 @@
                 $(table).DataTable().destroy();
             });
         }
+    </script>
+    <script type="text/javascript">
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&')
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location))
     </script>
 </body>
 
