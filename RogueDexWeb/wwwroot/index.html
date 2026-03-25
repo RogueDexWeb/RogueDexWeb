@@ -72,6 +72,15 @@
                                     }
                                 });
 
+                                input.onclick = function (evt) {
+                                    if (evt.stopPropagation !== undefined) {
+                                        evt.preventDefault();
+                                        evt.stopPropagation();
+                                    } else {
+                                        evt.cancelBubble = true;
+                                    }
+                                };
+
                                 $('#fulldextable tfoot tr').appendTo('#fulldextable thead');
                             });
                     }
