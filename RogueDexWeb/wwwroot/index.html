@@ -47,7 +47,7 @@
             $(document).ready(function () {
                 $(table).DataTable({
                     paging: false,
-                    searching: false,
+                    dom: 'lrt',
                     fixedHeader: {
                         headerOffset: $('#topnavbar').outerHeight(),
                     },
@@ -72,14 +72,9 @@
                                     }
                                 });
 
-                                input.onclick = function (evt) {
-                                    if (evt.stopPropagation !== undefined) {
-                                        evt.preventDefault();
-                                        evt.stopPropagation();
-                                    } else {
-                                        evt.cancelBubble = true;
-                                    }
-                                };
+                                input.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                });
 
                                 $('#fulldextable tfoot tr').appendTo('#fulldextable thead');
                             });
