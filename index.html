@@ -13,7 +13,7 @@
         baseTag.href = (path.indexOf(appRoot) === 0 || path + "/" === appRoot) ? appRoot : "/";
         document.head.appendChild(baseTag);
     </script>
-    <link href="_framework/dotnet.g9c7yqmm8m.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-1CPWUf52ocIH4Ul/U4uQ2u1DU4E7WaNKv4srIzvlXG0=" />
+    <link href="_framework/dotnet.q0a7uv26w8.js" rel="preload" as="script" fetchpriority="high" crossorigin="anonymous" integrity="sha256-hnesnu4fxdeIaZRAE7fscGxCRAh+vKKNLdZuFqBCDp4=" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
@@ -22,18 +22,18 @@
     <script type="importmap">{
   "imports": {
     "./_framework/blazor.webassembly.js": "./_framework/blazor.webassembly.66stpp682q.js",
-    "./_framework/dotnet.js": "./_framework/dotnet.g9c7yqmm8m.js",
     "./_framework/dotnet.native.js": "./_framework/dotnet.native.87vtjjdetb.js",
+    "./_framework/dotnet.js": "./_framework/dotnet.q0a7uv26w8.js",
     "./_framework/dotnet.runtime.js": "./_framework/dotnet.runtime.2tx45g8lli.js"
   },
   "scopes": {},
   "integrity": {
     "./_framework/blazor.webassembly.66stpp682q.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
     "./_framework/blazor.webassembly.js": "sha256-3lCWrko3zwspV40aQhs2S/IMkRSarnHRKIdkHhuXIBA=",
-    "./_framework/dotnet.g9c7yqmm8m.js": "sha256-1CPWUf52ocIH4Ul/U4uQ2u1DU4E7WaNKv4srIzvlXG0=",
-    "./_framework/dotnet.js": "sha256-1CPWUf52ocIH4Ul/U4uQ2u1DU4E7WaNKv4srIzvlXG0=",
+    "./_framework/dotnet.js": "sha256-hnesnu4fxdeIaZRAE7fscGxCRAh+vKKNLdZuFqBCDp4=",
     "./_framework/dotnet.native.87vtjjdetb.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
     "./_framework/dotnet.native.js": "sha256-zE11fbcG2CeLl1Zi+NJgMOfWpdjuUWNte+icrtAO58I=",
+    "./_framework/dotnet.q0a7uv26w8.js": "sha256-hnesnu4fxdeIaZRAE7fscGxCRAh+vKKNLdZuFqBCDp4=",
     "./_framework/dotnet.runtime.2tx45g8lli.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco=",
     "./_framework/dotnet.runtime.js": "sha256-2lZh9yO0fnzm3Xt7yV+Kox3DH3nK7L8hDhm84VT1xco="
   }
@@ -65,7 +65,7 @@
             $(document).ready(function () {
                 $(table).DataTable({
                     paging: false,
-                    searching: false,
+                    dom: 'lrt',
                     fixedHeader: {
                         headerOffset: $('#topnavbar').outerHeight(),
                     },
@@ -90,14 +90,9 @@
                                     }
                                 });
 
-                                input.onclick = function (evt) {
-                                    if (evt.stopPropagation !== undefined) {
-                                        evt.preventDefault();
-                                        evt.stopPropagation();
-                                    } else {
-                                        evt.cancelBubble = true;
-                                    }
-                                };
+                                input.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                });
 
                                 $('#fulldextable tfoot tr').appendTo('#fulldextable thead');
                             });
