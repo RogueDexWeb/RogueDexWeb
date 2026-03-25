@@ -23,6 +23,8 @@
                     <th colspan="7" style="text-align: center">Caught Data</th>
                     <th colspan="6" style="text-align: center">IVs</th>
                     <th colspan="4" style="text-align: center">Egg Moves</th>
+                    <th colspan="5" style="text-align: center">Unlocks</th>
+                    <th colspan="4" style="text-align: center">Stats</th>
                 </tr>
                 <tr>
                     <th style="text-align: center">Dex#</th>
@@ -47,6 +49,15 @@
                     <th style="text-align: center">Egg Move 2</th>
                     <th style="text-align: center">Egg Move 3</th>
                     <th style="text-align: center">Egg Move 4</th>
+                    <th style="text-align: center">Ability 1</th>
+                    <th style="text-align: center">Ability 2</th>
+                    <th style="text-align: center">Hidden Ability</th>
+                    <th style="text-align: center">Passive</th>
+                    <th style="text-align: center">Reductions</th>
+                    <th style="text-align: center">Candy</th>
+                    <th style="text-align: center">Friendship</th>
+                    <th style="text-align: center">Hatched</th>
+                    <th style="text-align: center">Classic Wins</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +69,9 @@
                     var female = dex.Species.Female ? dex.CaughtAttr.HasFlag(DexAttr.Female).ToString() : string.Empty;
                     var variant2 = dex.Species.HasVariants ? dex.CaughtAttr.HasFlag(DexAttr.Variant2).ToString() : string.Empty;
                     var variant3 = dex.Species.HasVariants ? dex.CaughtAttr.HasFlag(DexAttr.Variant3).ToString() : string.Empty;
+                    var ability2 = dex.Species.Ability2 != "NONE" ? dex.AbilityAttr.HasFlag(AbilityAttr.Second).ToString() : string.Empty;
+                    var hiddenAbility = dex.Species.HiddenAbility != "NONE" ? dex.AbilityAttr.HasFlag(AbilityAttr.Hidden).ToString() : string.Empty;
+
                     <tr>
                         <td style="text-align: right">@dex.DexNr</td>
                         <td style="text-align: left">@dex.Species.CleanName</td>
@@ -81,6 +95,15 @@
                         <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Second)</td>
                         <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Third)</td>
                         <td style="text-align: center">@dex.EggMoves.HasFlag(EggMoveAttr.Rare)</td>
+                        <td style="text-align: center">@dex.AbilityAttr.HasFlag(AbilityAttr.First)</td>
+                        <td style="text-align: center">@ability2</td>
+                        <td style="text-align: center">@hiddenAbility</td>
+                        <td style="text-align: center">@dex.PassiveAttr.HasFlag(PassiveAttr.Unlocked)</td>
+                        <td style="text-align: center">@dex.ValueReduction</td>
+                        <td style="text-align: center">@dex.CandyCount</td>
+                        <td style="text-align: center">@dex.Friendship</td>
+                        <td style="text-align: center">@dex.HatchedCount</td>
+                        <td style="text-align: center">@dex.ClassicWins</td>
                     </tr>
                 }
             </tbody>
@@ -108,6 +131,15 @@
                     <th>Egg Move 2</th>
                     <th>Egg Move 3</th>
                     <th>Egg Move 4</th>
+                    <th>Ability 1</th>
+                    <th>Ability 2</th>
+                    <th>Hidden Ability</th>
+                    <th>Passive</th>
+                    <th>Reductions</th>
+                    <th>Candy</th>
+                    <th>Friendship</th>
+                    <th>Hatched</th>
+                    <th>Classic Wins</th>
                 </tr>
             </tfoot>
         </table>
